@@ -8,6 +8,10 @@ function clearGrid(grid) {
 }
 
 function drawGrid(size) {
+    // BUT FIRST
+    clearGrid(drawingBoard);
+
+    // now draw
     for (let i = 0; i < size; i++) {
         console.log("DRAWING");
     }
