@@ -26,7 +26,13 @@ function drawGrid(size) {
 }
 
 gridSize.addEventListener('input', function() {
-    // console.log(gridSize.value);
+    // limit max grid size
+    if (gridSize.value <= 100) {
+        drawGrid(gridSize.value);
+    } else {
+        gridSize.value = 100;
+    }
+    
 });
 
 window.onload = function() {

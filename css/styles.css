@@ -31,7 +31,7 @@ h1 {
 
 .row, .column {
     flex-grow: 1;
-    outline: 1px solid black;
+    outline: 1px solid lightgrey;
 }
 
 .row {
