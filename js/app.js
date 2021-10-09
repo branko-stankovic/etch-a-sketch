@@ -7,7 +7,7 @@ function clearGrid(grid) {
     }
 }
 
-function drawGrid(size) {
+function createGrid(size) {
     // BUT FIRST
     clearGrid(drawingBoard);
 
@@ -28,7 +28,7 @@ function drawGrid(size) {
 gridSize.addEventListener('input', function() {
     // limit max grid size
     if (gridSize.value <= 100) {
-        drawGrid(gridSize.value);
+        createGrid(gridSize.value);
     } else {
         gridSize.value = 100;
     }
@@ -36,5 +36,5 @@ gridSize.addEventListener('input', function() {
 });
 
 window.onload = function() {
-    drawGrid(gridSize.value);
+    createGrid(gridSize.value);
 }
