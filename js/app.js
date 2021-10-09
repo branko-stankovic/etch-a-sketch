@@ -13,12 +13,20 @@ function drawGrid(size) {
 
     // now draw
     for (let i = 0; i < size; i++) {
-        console.log("DRAWING");
+        let row = document.createElement('div');
+        row.classList.add('row');
+        drawingBoard.appendChild(row);
+
+        for (let j = 0; j < size; j++) {
+            let column = document.createElement('div');
+            column.classList.add('column');
+            row.appendChild(column);
+        }
     }
 }
 
 gridSize.addEventListener('input', function() {
-    console.log(gridSize.value);
+    // console.log(gridSize.value);
 });
 
 window.onload = function() {
