@@ -1,7 +1,7 @@
 const drawingBoard = document.getElementById('container');
 const gridSize = document.getElementById('gridSize');
 
-function clearGrid(grid) {
+function deleteGrid(grid) {
     while (grid.firstChild) {
         grid.removeChild(grid.firstChild);
     }
@@ -9,7 +9,7 @@ function clearGrid(grid) {
 
 function createGrid(size) {
     // BUT FIRST
-    clearGrid(drawingBoard);
+    deleteGrid(drawingBoard);
 
     // now draw
     for (let i = 0; i < size; i++) {
