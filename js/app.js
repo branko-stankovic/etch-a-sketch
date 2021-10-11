@@ -1,5 +1,6 @@
 const drawingBoard = document.getElementById('container');
 const gridSize = document.getElementById('gridSize');
+const clearGrid = document.getElementById('clearGrid');
 
 function deleteGrid(grid) {
     while (grid.firstChild) {
@@ -36,6 +37,12 @@ gridSize.addEventListener('input', function() {
     }
     
 });
+
+drawingBoard.addEventListener('mouseover', function(e) {
+    e.target.style.backgroundColor = "black";
+});
+
+clearGrid.addEventListener('click', () => createGrid(gridSize.value));
 
 window.onload = function() {
     createGrid(gridSize.value);
