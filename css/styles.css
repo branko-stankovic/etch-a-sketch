@@ -29,7 +29,7 @@ h1 {
     flex-direction: column;
 }
 
-.row, .column {
+.row, .gridCell {
     flex-grow: 1;
     outline: 1px solid lightgrey;
 }

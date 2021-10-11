@@ -18,9 +18,9 @@ function createGrid(size) {
         drawingBoard.appendChild(row);
 
         for (let j = 0; j < size; j++) {
-            let column = document.createElement('div');
-            column.classList.add('column');
-            row.appendChild(column);
+            let gridCell = document.createElement('div');
+            gridCell.classList.add('gridCell');
+            row.appendChild(gridCell);
         }
     }
 }
