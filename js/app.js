@@ -20,6 +20,8 @@ function createGrid(size) {
         for (let j = 0; j < size; j++) {
             let gridCell = document.createElement('div');
             gridCell.classList.add('gridCell');
+            let cellIndex = (i * gridSize.value) + j;
+            gridCell.setAttribute('data-index', cellIndex);
             row.appendChild(gridCell);
         }
     }
