@@ -28,6 +28,11 @@ function createGrid(size) {
     }
 }
 
+function randomColor() {
+    let random = Math.floor(Math.random() * 360);
+    return `hsl(${random}, 100%, 50%)`;
+};
+
 gridSize.addEventListener('input', function() {
     // limit max grid size
     if (gridSize.value <= 100) {
@@ -39,7 +44,7 @@ gridSize.addEventListener('input', function() {
 });
 
 drawingBoard.addEventListener('mouseover', function(e) {
-    e.target.style.backgroundColor = "black";
+    e.target.style.backgroundColor = randomColor();
 });
 
 clearGrid.addEventListener('click', () => createGrid(gridSize.value));
