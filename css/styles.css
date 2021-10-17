@@ -40,6 +40,9 @@ h1 {
 
 .userMenu {
     padding-top: 1.5em;
+    width: 500px;
+    margin: 0 auto;
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
+    align-items: center;
 }
