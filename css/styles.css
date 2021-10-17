@@ -38,6 +38,10 @@ h1 {
     display: flex;
 }
 
+.gridCell {
+    cursor: cell;
+}
+
 .userMenu {
     padding-top: 1.5em;
     width: 500px;
