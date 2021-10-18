@@ -71,6 +71,10 @@ clearGrid.addEventListener('click', () => createGrid(gridSize.value));
 
 drawModeOptions.forEach(option => option.addEventListener('click', function(e) {
     chosenDrawMode = drawModes[e.target.value];
+    drawModeOptions.forEach(button => {
+        button.classList.remove('active');
+    });
+    this.classList.add('active');
 }));
 
 window.onload = function() {
