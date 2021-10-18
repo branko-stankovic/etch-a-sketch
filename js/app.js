@@ -1,6 +1,7 @@
 const drawingBoard = document.getElementById('container');
 const gridSize = document.getElementById('gridSize');
 const clearGrid = document.getElementById('clearGrid');
+const drawModeOptions = document.querySelectorAll('.drawModeOptions button');
 
 function deleteGrid(grid) {
     while (grid.firstChild) {
@@ -28,20 +29,20 @@ function createGrid(size) {
     }
 }
 
-function drawRandomColor() {
-    let random = Math.floor(Math.random() * 360);
-    return `hsl(${random}, 100%, 50%)`;
-};
+const drawModes = {
+    rainbow: function drawRandomColor() {
+        let random = Math.floor(Math.random() * 360);
+        return `hsl(${random}, 100%, 50%)`;
+    },
+    black: function drawBlackColor() {
+        return 'black';
+    },
+    erase: function eraseColor() {
+        return '';
+    }
+}
 
-function drawBlackColor() {
-    return 'black';
-};
-
-function eraseColor() {
-    return '';
-};
-
-let drawMode = drawRandomColor;
+let chosenDrawMode = drawModes.rainbow;
 
 gridSize.addEventListener('input', function() {
     // limit max grid size
@@ -54,10 +55,14 @@ gridSize.addEventListener('input', function() {
 });
 
 drawingBoard.addEventListener('mouseover', function(e) {
-    e.target.style.backgroundColor = drawMode();
+    e.target.style.backgroundColor = chosenDrawMode();
 });
 
 clearGrid.addEventListener('click', () => createGrid(gridSize.value));
+
+drawModeOptions.forEach(option => option.addEventListener('click', function(e) {
+    chosenDrawMode = drawModes[e.target.value];
+}));
 
 window.onload = function() {
     createGrid(gridSize.value);
