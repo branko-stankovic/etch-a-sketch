@@ -56,3 +56,13 @@ h1 {
 .userMenu, button {
     font-family: Ubuntu;
 }
+
+button {
+    font-size: 0.9em;
+    padding: 2px 5px 2px 5px;
+}
+
+button.active {
+    background-color: black;
+    color: white;
+}
