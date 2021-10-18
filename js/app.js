@@ -24,6 +24,7 @@ function createGrid(size) {
             gridCell.classList.add('gridCell');
             let cellIndex = (i * gridSize.value) + j;
             gridCell.setAttribute('data-index', cellIndex);
+            gridCell.setAttribute('data-gradient', 0);
             row.appendChild(gridCell);
         }
     }
@@ -37,7 +38,15 @@ const drawModes = {
     black: function drawBlackColor() {
         return 'black';
     },
-    erase: function eraseColor() {
+    gradient: (e) => {
+        let currentOpacity = e.target.dataset.gradient;
+        currentOpacity++;
+        e.target.dataset.gradient++;
+
+        return `rgba(0,0,0,${currentOpacity / 10})`;
+    },
+    erase: function eraseColor(e) {
+        e.target.dataset.gradient = 0;
         return '';
     }
 }
@@ -55,7 +64,7 @@ gridSize.addEventListener('input', function() {
 });
 
 drawingBoard.addEventListener('mouseover', function(e) {
-    e.target.style.backgroundColor = chosenDrawMode();
+    e.target.style.backgroundColor = chosenDrawMode(e);
 });
 
 clearGrid.addEventListener('click', () => createGrid(gridSize.value));
