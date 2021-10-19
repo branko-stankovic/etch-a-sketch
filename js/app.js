@@ -77,6 +77,18 @@ drawModeOptions.forEach(option => option.addEventListener('click', function(e) {
     this.classList.add('active');
 }));
 
+document.addEventListener('keydown', function(e) {
+    let key = e.key.toLowerCase();
+
+    if (key == "+") {
+        gridSize.value++;
+        createGrid(gridSize.value);
+    } else if (key == "-") {
+        gridSize.value--;
+        createGrid(gridSize.value);
+    }
+});
+
 window.onload = function() {
     createGrid(gridSize.value);
 }

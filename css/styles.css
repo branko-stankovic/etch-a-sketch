@@ -57,6 +57,10 @@ h1 {
     font-family: Ubuntu;
 }
 
+#gridSize {
+    max-width: 3.5em;
+}
+
 button {
     font-size: 0.9em;
     padding: 2px 4px 2px 4px;
