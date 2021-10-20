@@ -58,20 +58,25 @@ function createGrid(size) {
 
 gridSize.addEventListener('input', function() {
     // limit lower bound
-    if (gridSize.value < 0) {
+    if (gridSize.value < 1) {
         gridSize.value = 1;
-    }
-
-    // and upper bound
-    if (gridSize.value <= 100) {
-        createGrid(gridSize.value);
-    } else {
+    } else if (gridSize.value > 100) {
         gridSize.value = 100;
     }
+
+    createGrid(gridSize.value);
+
+    // and upper bound
+    // if (gridSize.value <= 100) {
+    //     createGrid(gridSize.value);
+    // } else {
+    //     gridSize.value = 100;
+    // }
     
 });
 
 drawingBoard.addEventListener('mouseover', function(e) {
+    console.log(e.target);
     e.target.style.backgroundColor = chosenDrawMode(e.target);
 });
 
@@ -88,10 +93,10 @@ drawModeOptions.forEach(option => option.addEventListener('click', function(e) {
 }));
 
 document.addEventListener('keydown', function(e) {
-    if (e.key == "+") {
+    if (e.key == "+" && gridSize.value < 100) {
         gridSize.value++;
         createGrid(gridSize.value);
-    } else if (e.key == "-") {
+    } else if (e.key == "-" && gridSize.value > 1) {
         gridSize.value--;
         createGrid(gridSize.value);
     }
