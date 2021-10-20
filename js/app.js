@@ -3,6 +3,26 @@ const gridSize = document.getElementById('gridSize');
 const clearGrid = document.getElementById('clearGrid');
 const drawModeOptions = document.querySelectorAll('.drawModeOptions button');
 
+const drawModes = {
+    rainbow: function drawRandomColor() {
+        let random = Math.floor(Math.random() * 360);
+        return `hsl(${random}, 100%, 50%)`;
+    },
+    black: function drawBlackColor() {
+        return 'black';
+    },
+    gradient: (cell) => {
+        cell.dataset.gradient++;
+        return `rgba(0,0,0,${cell.dataset.gradient / 10})`;
+    },
+    erase: function eraseColor(cell) {
+        cell.dataset.gradient = 0;
+        return '';
+    }
+}
+
+let chosenDrawMode = drawModes.rainbow;
+
 function deleteGrid(grid) {
     while (grid.firstChild) {
         grid.removeChild(grid.firstChild);
@@ -23,35 +43,11 @@ function createGrid(size) {
             let gridCell = document.createElement('div');
             gridCell.classList.add('gridCell');
             let cellIndex = (i * gridSize.value) + j;
-            gridCell.setAttribute('data-index', cellIndex);
             gridCell.setAttribute('data-gradient', 0);
             row.appendChild(gridCell);
         }
     }
 }
-
-const drawModes = {
-    rainbow: function drawRandomColor() {
-        let random = Math.floor(Math.random() * 360);
-        return `hsl(${random}, 100%, 50%)`;
-    },
-    black: function drawBlackColor() {
-        return 'black';
-    },
-    gradient: (e) => {
-        let currentOpacity = e.target.dataset.gradient;
-        currentOpacity++;
-        e.target.dataset.gradient++;
-
-        return `rgba(0,0,0,${currentOpacity / 10})`;
-    },
-    erase: function eraseColor(e) {
-        e.target.dataset.gradient = 0;
-        return '';
-    }
-}
-
-let chosenDrawMode = drawModes.rainbow;
 
 gridSize.addEventListener('input', function() {
     // limit max grid size
@@ -64,7 +60,7 @@ gridSize.addEventListener('input', function() {
 });
 
 drawingBoard.addEventListener('mouseover', function(e) {
-    e.target.style.backgroundColor = chosenDrawMode(e);
+    e.target.style.backgroundColor = chosenDrawMode(e.target);
 });
 
 clearGrid.addEventListener('click', () => createGrid(gridSize.value));
