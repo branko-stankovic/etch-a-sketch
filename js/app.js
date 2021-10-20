@@ -29,7 +29,7 @@ const drawModes = {
     }
 }
 
-// default mode
+// default drawing mode
 let chosenDrawMode = drawModes.rainbow;
 
 function deleteGrid(grid) {
@@ -79,6 +79,8 @@ clearGrid.addEventListener('click', () => createGrid(gridSize.value));
 
 drawModeOptions.forEach(option => option.addEventListener('click', function(e) {
     chosenDrawMode = drawModes[e.target.value];
+
+    // change active menu button
     drawModeOptions.forEach(button => {
         button.classList.remove('active');
     });
@@ -86,12 +88,10 @@ drawModeOptions.forEach(option => option.addEventListener('click', function(e) {
 }));
 
 document.addEventListener('keydown', function(e) {
-    let key = e.key.toLowerCase();
-
-    if (key == "+") {
+    if (e.key == "+") {
         gridSize.value++;
         createGrid(gridSize.value);
-    } else if (key == "-") {
+    } else if (e.key == "-") {
         gridSize.value--;
         createGrid(gridSize.value);
     }
