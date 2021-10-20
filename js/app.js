@@ -76,7 +76,11 @@ gridSize.addEventListener('input', function() {
 });
 
 drawingBoard.addEventListener('mouseover', function(e) {
-    console.log(e.target);
+    // prevent the whole container getting colored on page load
+    // if the user has cursor in the middle of the page
+    if (e.target.id == "container") {
+        return;
+    }
     e.target.style.backgroundColor = chosenDrawMode(e.target);
 });
 
