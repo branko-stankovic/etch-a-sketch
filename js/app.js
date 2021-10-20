@@ -8,19 +8,28 @@ const drawModes = {
         let random = Math.floor(Math.random() * 360);
         return `hsl(${random}, 100%, 50%)`;
     },
+
     black: function drawBlackColor() {
         return 'black';
     },
+
     gradient: (cell) => {
-        cell.dataset.gradient++;
+        // limit max gradient level
+        if (cell.dataset.gradient < 10) {
+            cell.dataset.gradient++;
+        }
+        // data-gradient is 10x opacity because 
+        // js 0.1 + 0.2 sometimes != 0.3
         return `rgba(0,0,0,${cell.dataset.gradient / 10})`;
     },
+
     erase: function eraseColor(cell) {
         cell.dataset.gradient = 0;
         return '';
     }
 }
 
+// default mode
 let chosenDrawMode = drawModes.rainbow;
 
 function deleteGrid(grid) {
@@ -33,7 +42,6 @@ function createGrid(size) {
     // BUT FIRST
     deleteGrid(drawingBoard);
 
-    // now draw
     for (let i = 0; i < size; i++) {
         let row = document.createElement('div');
         row.classList.add('row');
@@ -42,7 +50,6 @@ function createGrid(size) {
         for (let j = 0; j < size; j++) {
             let gridCell = document.createElement('div');
             gridCell.classList.add('gridCell');
-            let cellIndex = (i * gridSize.value) + j;
             gridCell.setAttribute('data-gradient', 0);
             row.appendChild(gridCell);
         }
@@ -50,7 +57,12 @@ function createGrid(size) {
 }
 
 gridSize.addEventListener('input', function() {
-    // limit max grid size
+    // limit lower bound
+    if (gridSize.value < 0) {
+        gridSize.value = 1;
+    }
+
+    // and upper bound
     if (gridSize.value <= 100) {
         createGrid(gridSize.value);
     } else {
