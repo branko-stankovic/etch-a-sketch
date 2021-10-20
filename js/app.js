@@ -8,11 +8,9 @@ const drawModes = {
         let random = Math.floor(Math.random() * 360);
         return `hsl(${random}, 100%, 50%)`;
     },
-
     black: function drawBlackColor() {
         return 'black';
     },
-
     gradient: (cell) => {
         // limit max gradient level
         if (cell.dataset.gradient < 10) {
@@ -22,7 +20,6 @@ const drawModes = {
         // js 0.1 + 0.2 sometimes != 0.3
         return `rgba(0,0,0,${cell.dataset.gradient / 10})`;
     },
-
     erase: function eraseColor(cell) {
         cell.dataset.gradient = 0;
         return '';
@@ -39,7 +36,7 @@ function deleteGrid(grid) {
 }
 
 function createGrid(size) {
-    // BUT FIRST
+    // but first clear the old one
     deleteGrid(drawingBoard);
 
     for (let i = 0; i < size; i++) {
@@ -57,7 +54,7 @@ function createGrid(size) {
 }
 
 gridSize.addEventListener('input', function() {
-    // limit lower bound
+    // limit lower and upper bound
     if (gridSize.value < 1) {
         gridSize.value = 1;
     } else if (gridSize.value > 100) {
@@ -65,14 +62,6 @@ gridSize.addEventListener('input', function() {
     }
 
     createGrid(gridSize.value);
-
-    // and upper bound
-    // if (gridSize.value <= 100) {
-    //     createGrid(gridSize.value);
-    // } else {
-    //     gridSize.value = 100;
-    // }
-    
 });
 
 drawingBoard.addEventListener('mouseover', function(e) {
@@ -84,6 +73,7 @@ drawingBoard.addEventListener('mouseover', function(e) {
     e.target.style.backgroundColor = chosenDrawMode(e.target);
 });
 
+// to clear it up, make a new grid of same size
 clearGrid.addEventListener('click', () => createGrid(gridSize.value));
 
 drawModeOptions.forEach(option => option.addEventListener('click', function(e) {
