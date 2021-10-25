@@ -76,10 +76,11 @@ drawingBoard.addEventListener('mouseover', function(e) {
 // to clear it up, make a new grid of same size
 clearGrid.addEventListener('click', () => createGrid(gridSize.value));
 
+// change drawing mode
 drawModeOptions.forEach(option => option.addEventListener('click', function(e) {
     chosenDrawMode = drawModes[e.target.value];
 
-    // change active menu button
+    // change active drawing mode button
     drawModeOptions.forEach(button => {
         button.classList.remove('active');
     });
